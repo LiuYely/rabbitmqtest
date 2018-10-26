@@ -1,0 +1,224 @@
+package com.example.springbootproducer.config.database;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+/**
+ * 读取配置文件的内容，将数据源的信息封装到类中，此类用于配置数据源
+ * @author YE
+ *
+ */
+
+@Component
+@ConfigurationProperties(prefix="spring.datasource")//读取配置文件中的内容
+@PropertySource("classpath:druid.properties")//读取配置文件
+public class DruidDataSourceSettings {
+
+	private String driverClassName;
+	private String url;
+	private String username;
+	private String password;
+	
+	@Value("${druid.initialSize}")
+	private int initialSize;
+	
+	@Value("${druid.minIdle}")
+    private int minIdle;
+	
+	@Value("${druid.maxActive}")
+    private int maxActive;
+	
+	@Value("${druid.maxWait}")
+    private long maxWait;
+	
+	@Value("${druid.timeBetweenEvictionRunsMillis}")
+    private long timeBetweenEvictionRunsMillis;
+	
+	@Value("${druid.minEvictableIdleTimeMillis}")
+    private Long minEvictableIdleTimeMillis;
+	
+	@Value("${druid.validationQuery}")
+    private String validationQuery;
+	
+	@Value("${druid.testWhileIdle}")
+    private boolean testWhileIdle;
+	
+	@Value("${druid.testOnBorrow}")
+    private boolean testOnBorrow;
+	
+	@Value("${druid.testOnReturn}")
+    private Boolean testOnReturn;
+	
+	@Value("${druid.poolPreparedStatements}")
+    private Boolean poolPreparedStatements;
+	
+    @Value("${druid.maxOpenPreparedStatements}")
+    private Integer maxOpenPreparedStatements;
+    
+    @Value("${druid.filters}")
+    private String filters;
+    
+    @Value("${druid.connectionProperties}")
+    private String connectionProperties;
+    
+    @Value("${druid.useGlobalDataSourceStat}")
+    private Boolean useGlobalDataSourceStat;
+
+	public String getDriverClassName() {
+		return driverClassName;
+	}
+
+	public void setDriverClassName(String driverClassName) {
+		this.driverClassName = driverClassName;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getInitialSize() {
+		return initialSize;
+	}
+
+	public void setInitialSize(int initialSize) {
+		this.initialSize = initialSize;
+	}
+
+	public int getMinIdle() {
+		return minIdle;
+	}
+
+	public void setMinIdle(int minIdle) {
+		this.minIdle = minIdle;
+	}
+
+	public int getMaxActive() {
+		return maxActive;
+	}
+
+	public void setMaxActive(int maxActive) {
+		this.maxActive = maxActive;
+	}
+
+	public long getMaxWait() {
+		return maxWait;
+	}
+
+	public void setMaxWait(long maxWait) {
+		this.maxWait = maxWait;
+	}
+
+	public long getTimeBetweenEvictionRunsMillis() {
+		return timeBetweenEvictionRunsMillis;
+	}
+
+	public void setTimeBetweenEvictionRunsMillis(long timeBetweenEvictionRunsMillis) {
+		this.timeBetweenEvictionRunsMillis = timeBetweenEvictionRunsMillis;
+	}
+
+	public Long getMinEvictableIdleTimeMillis() {
+		return minEvictableIdleTimeMillis;
+	}
+
+	public void setMinEvictableIdleTimeMillis(Long minEvictableIdleTimeMillis) {
+		this.minEvictableIdleTimeMillis = minEvictableIdleTimeMillis;
+	}
+
+	public String getValidationQuery() {
+		return validationQuery;
+	}
+
+	public void setValidationQuery(String validationQuery) {
+		this.validationQuery = validationQuery;
+	}
+
+	public boolean isTestWhileIdle() {
+		return testWhileIdle;
+	}
+
+	public void setTestWhileIdle(boolean testWhileIdle) {
+		this.testWhileIdle = testWhileIdle;
+	}
+
+	public boolean isTestOnBorrow() {
+		return testOnBorrow;
+	}
+
+	public void setTestOnBorrow(boolean testOnBorrow) {
+		this.testOnBorrow = testOnBorrow;
+	}
+
+	public Boolean getTestOnReturn() {
+		return testOnReturn;
+	}
+
+	public void setTestOnReturn(Boolean testOnReturn) {
+		this.testOnReturn = testOnReturn;
+	}
+
+	public Boolean getPoolPreparedStatements() {
+		return poolPreparedStatements;
+	}
+
+	public void setPoolPreparedStatements(Boolean poolPreparedStatements) {
+		this.poolPreparedStatements = poolPreparedStatements;
+	}
+
+	public Integer getMaxOpenPreparedStatements() {
+		return maxOpenPreparedStatements;
+	}
+
+	public void setMaxOpenPreparedStatements(Integer maxOpenPreparedStatements) {
+		this.maxOpenPreparedStatements = maxOpenPreparedStatements;
+	}
+
+	public String getFilters() {
+		return filters;
+	}
+
+	public void setFilters(String filters) {
+		this.filters = filters;
+	}
+
+	public String getConnectionProperties() {
+		return connectionProperties;
+	}
+
+	public void setConnectionProperties(String connectionProperties) {
+		this.connectionProperties = connectionProperties;
+	}
+
+	public Boolean getUseGlobalDataSourceStat() {
+		return useGlobalDataSourceStat;
+	}
+
+	public void setUseGlobalDataSourceStat(Boolean useGlobalDataSourceStat) {
+		this.useGlobalDataSourceStat = useGlobalDataSourceStat;
+	}
+
+	
+	
+	
+}

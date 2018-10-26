@@ -1,0 +1,12 @@
+package com.example.springbootproducer.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.example.springbootproducer.entity.Order;
+
+@Mapper
+public interface OrderMapper {
+
+	//新增订单/消息
+	void insertOrder(Order order);
+}

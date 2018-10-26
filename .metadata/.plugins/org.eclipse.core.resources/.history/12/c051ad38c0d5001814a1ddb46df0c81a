@@ -1,0 +1,22 @@
+package com.example.springbootproducer.producer;
+
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.example.springbootproducer.entity.User;
+
+@Component
+public class Sender {
+
+	@Autowired
+	private AmqpTemplate amqpTemplate;
+	
+	public void sendTest(User user) {
+		
+		amqpTemplate.convertAndSend("test_exchange", //路由交换机
+				"test_key", //路由Key
+				user, //内容
+				messagePostProcessor); //消息唯一ID
+	}
+}

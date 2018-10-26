@@ -1,0 +1,26 @@
+package com.example.springbootproducer.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.springbootproducer.entity.Order;
+import com.example.springbootproducer.mapper.MessageLogMapper;
+import com.example.springbootproducer.mapper.OrderMapper;
+import com.example.springbootproducer.producer.RabbitOrderSender;
+
+@Service
+public class OrderService {
+
+	@Autowired
+	private RabbitOrderSender rabbitOrderSender;
+	
+	@Autowired
+	private OrderMapper orderMapper;
+	
+	@Autowired
+	private MessageLogMapper messageLogMapper;
+	
+	public void creatOrder(Order order) {
+		
+	}
+}

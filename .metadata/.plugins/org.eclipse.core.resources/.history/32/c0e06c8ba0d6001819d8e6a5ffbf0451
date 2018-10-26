@@ -1,0 +1,8 @@
+package com.example.springbootproducer.mapper;
+
+import com.example.springbootproducer.entity.Order;
+
+public interface OrderMapper {
+
+	void insertOrder(Order order);
+}

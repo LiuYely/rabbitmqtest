@@ -1,0 +1,20 @@
+package com.example.springbootproducer.consumer;
+
+import java.util.Map;
+
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.messaging.handler.annotation.Headers;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Component;
+
+import com.example.springbootproducer.entity.User;
+import com.rabbitmq.client.AMQP.Channel;
+
+@Component
+public class Receiver {
+
+	@RabbitHandler
+	public void onTestMessage(@Payload User user,@Headers Map<String, Object> Channel channel) {
+		
+	}
+}

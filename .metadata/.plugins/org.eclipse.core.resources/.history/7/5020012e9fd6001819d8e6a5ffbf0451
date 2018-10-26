@@ -1,0 +1,10 @@
+package com.example.springbootproducer.mapper;
+
+import com.example.springbootproducer.entity.MessageLog;
+
+public interface MessageLogMapper {
+
+	void updateMessageStatus(MessageLog messageLog);
+	
+	void insertMessageLog(MessageLog messageLog);
+}

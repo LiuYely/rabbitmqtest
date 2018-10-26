@@ -1,0 +1,25 @@
+package com.example.springbootproducer.task;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import com.example.springbootproducer.mapper.MessageLogMapper;
+import com.example.springbootproducer.producer.RabbitOrderSender;
+
+@Component
+public class RetryMessageTasker {
+
+	@Autowired
+	private RabbitOrderSender rabbitOrderSender;
+	
+	@Autowired
+	private MessageLogMapper messageLogMapper;
+	
+	@Scheduled(initialDelay = 3000,fixedDelay = 10000)
+	public void retrySend() {
+		
+		
+	}
+	
+}

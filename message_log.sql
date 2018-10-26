@@ -1,0 +1,1 @@
+INSERT INTO `message_log`(`message_id`, `message`, `try_count`, `status`, `next_retry`, `create_time`, `update_time`) VALUES ('f08a1f67-32cf-4eb2-ae26-ebad2a074b1d&1540432396745', '{\"id\":\"2018102300000006\",\"messageId\":\"f08a1f67-32cf-4eb2-ae26-ebad2a074b1d&1540432396745\",\"name\":\"测试的消息数据\"}', 1, '1', '2018-10-25 09:53:27', '2018-10-25 09:53:17', '2018-10-25 09:53:27');

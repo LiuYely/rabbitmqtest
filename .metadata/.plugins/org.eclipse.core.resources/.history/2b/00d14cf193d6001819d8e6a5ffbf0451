@@ -1,0 +1,5 @@
+package com.example.springbootproducer.mapper;
+
+public class MessageLogMapper {
+
+}

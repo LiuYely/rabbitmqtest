@@ -1,0 +1,5 @@
+package com.example.springbootproducer.config.database;
+
+public class DruidDataSourceSettings {
+
+}

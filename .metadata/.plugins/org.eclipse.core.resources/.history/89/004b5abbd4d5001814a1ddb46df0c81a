@@ -1,0 +1,53 @@
+package com.example.springbootproducer.config.database;
+
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.alibaba.druid.pool.DruidDataSource;
+
+@Configuration
+@EnableTransactionManagement
+public class DruidDataSourceConfig {
+
+	private static final Logger logger = LoggerFactory.getLogger(DruidDataSourceConfig.class);
+
+    @Autowired
+    private DruidDataSourceSettings jdbcConfig;
+    
+    public static String DRIVER_CLASSNAME;
+
+    @Bean
+    @Primary //在同样的DataSource中，首先使用被标注的DataSource
+    public DataSource dataSource() {
+        DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setUrl(jdbcConfig.getUrl());
+        druidDataSource.setUsername(jdbcConfig.getUsername());
+        druidDataSource.setPassword(jdbcConfig.getPassword());
+        druidDataSource.setInitialSize(jdbcConfig.getInitialSize());
+        druidDataSource.setMinIdle(jdbcConfig.getMinIdle());
+        druidDataSource.setMaxActive(jdbcConfig.getMaxActive());
+        druidDataSource.setTimeBetweenEvictionRunsMillis(jdbcConfig.getTimeBetweenEvictionRunsMillis());
+        druidDataSource.setValidationQuery(jdbcConfig.getValidationQuery());
+        druidDataSource.setTestWhileIdle(jdbcConfig.isTestWhileIdle());
+        druidDataSource.setTestOnBorrow(jdbcConfig.isTestOnBorrow());
+        druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(jdbcConfig.getMaxPoolPreparedStatementPerConnectionSize());
+        try {
+            druidDataSource.setFilters(jdbcConfig.getFilters());
+        } catch (SQLException e) {
+            if (logger.isInfoEnabled()) {
+                logger.info(e.getMessage(), e);
+            }
+        }
+        return druidDataSource;
+    }
+
+}

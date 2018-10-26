@@ -1,0 +1,5 @@
+package com.example.springbootproducer.service;
+
+public class OrderService {
+
+}

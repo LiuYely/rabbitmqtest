@@ -1,0 +1,47 @@
+package com.example.springbootproducer.config.database;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties(prefix="spring.datasource")
+@PropertySource("classpath:druid.properties")
+public class DruidDataSourceSettings {
+
+	private String driverClassName;
+	private String url;
+	private String username;
+	private String password;
+	
+	@Value("${druid.initialSize}")
+	private int initialSize;
+	
+	@Value("${spring.datasource.minIdle}")
+    private int minIdle;
+	
+	@Value("${spring.datasource.maxActive}")
+    private int maxActive;
+	
+	@Value("${spring.datasource.maxWait}")
+    private long maxWait;
+	
+	@Value("${spring.datasource.timeBetweenEvictionRunsMillis}")
+    private long timeBetweenEvictionRunsMillis;
+	
+	@Value("${spring.datasource.validationQuery}")
+    private String validationQuery;
+	
+	@Value("${spring.datasource.testWhileIdle}")
+    private boolean testWhileIdle;
+	
+	@Value("${spring.datasource.testOnBorrow}")
+    private boolean testOnBorrow;
+	
+	@Value("${spring.datasource.maxPoolPreparedStatementPerConnectionSize}")
+    private int maxPoolPreparedStatementPerConnectionSize;
+	
+	
+	
+}

@@ -1,0 +1,92 @@
+package com.example.springbootproducer.config.database;
+
+import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.alibaba.druid.pool.DruidDataSource;
+
+/**
+ * 
+ * @author YE
+ *设置数据源并开启事务
+ *
+ */
+
+@Configuration
+@EnableTransactionManagement
+public class DruidDataSourceConfig {
+
+	//日志对象，记录当前类的操作
+	private static final Logger logger = LoggerFactory.getLogger(DruidDataSourceConfig.class);
+
+    @Autowired
+    private DruidDataSourceSettings jdbcConfig;
+    
+    //public static String DRIVER_CLASSNAME;
+    
+    /*@Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    	return new PropertySourcesPlaceholderConfigurer();
+    }*/
+
+    /**
+     * 开启数据源
+     * @return
+     */
+    @Bean
+    @Primary //在同样的DataSource中，首先使用被标注的DataSource
+    public DataSource dataSource() throws Exception {
+        DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setDriverClassName(jdbcConfig.getDriverClassName());
+        DRIVER_CLASSNAME = jdbcConfig.getDriverClassName();
+        druidDataSource.setUrl(jdbcConfig.getUrl());
+        druidDataSource.setUsername(jdbcConfig.getUsername());
+        druidDataSource.setPassword(jdbcConfig.getPassword());
+        druidDataSource.setInitialSize(jdbcConfig.getInitialSize());
+        druidDataSource.setMinIdle(jdbcConfig.getMinIdle());
+        druidDataSource.setMaxActive(jdbcConfig.getMaxActive());
+        druidDataSource.setTimeBetweenEvictionRunsMillis(jdbcConfig.getTimeBetweenEvictionRunsMillis());
+        druidDataSource.setValidationQuery(jdbcConfig.getValidationQuery());
+        
+        druidDataSource.setTestWhileIdle(jdbcConfig.isTestWhileIdle());
+        druidDataSource.setTestOnBorrow(jdbcConfig.isTestOnBorrow());
+        
+        druidDataSource.setTestOnReturn(jdbcConfig.getTestOnReturn());
+        druidDataSource.setPoolPreparedStatements(jdbcConfig.getPoolPreparedStatements());
+        druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(jdbcConfig.getMaxOpenPreparedStatements());
+
+        druidDataSource.setFilters(jdbcConfig.getFilters());
+        druidDataSource.setConnectionProperties(jdbcConfig.getConnectionProperties());
+        logger.info("druid datasource config : {}",druidDataSource);
+        /*try {
+            druidDataSource.setFilters(jdbcConfig.getFilters());
+        } catch (SQLException e) {
+            if (logger.isInfoEnabled()) {
+                logger.info(e.getMessage(), e);
+            }
+        }*/
+        return druidDataSource;
+    }
+    /**
+     * 开启事务
+     * @return
+     * @throws Exception
+     */
+    @Bean
+    public PlatformTransactionManager transactionManager()throws Exception {
+    	DataSourceTransactionManager txManager = new DataSourceTransactionManager();
+    	txManager.setDataSource(dataSource());
+    	return txManager;
+    }
+
+}

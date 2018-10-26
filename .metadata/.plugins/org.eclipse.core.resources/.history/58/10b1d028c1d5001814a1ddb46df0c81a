@@ -1,0 +1,48 @@
+package com.example.springbootproducer.entity;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String name;
+	private int age;
+	private int message;
+	
+	public User() {
+		super();
+	}
+	public User(String name, int age, int message) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.message = message;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public int getMessage() {
+		return message;
+	}
+	public void setMessage(int message) {
+		this.message = message;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+	
+}

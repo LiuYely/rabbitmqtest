@@ -1,0 +1,5 @@
+package com.example.springbootproducer.consumer;
+
+public class Receiver {
+
+}

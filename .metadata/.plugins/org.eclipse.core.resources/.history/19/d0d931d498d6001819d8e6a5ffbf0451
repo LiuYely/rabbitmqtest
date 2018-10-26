@@ -1,0 +1,48 @@
+package com.example.springbootproducer.producer;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate.ConfirmCallback;
+import org.springframework.amqp.rabbit.support.CorrelationData;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.example.springbootproducer.constant.Constant;
+import com.example.springbootproducer.entity.MessageLog;
+import com.example.springbootproducer.entity.Order;
+import com.example.springbootproducer.mapper.MessageLogMapper;
+/**
+ * 
+ * @author YE
+ *
+ *发送消息并设置回调函数
+ */
+@Component
+public class RabbitOrderSender {
+
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
+	
+	@Autowired
+	private MessageLogMapper messageLogMapper;
+	
+	private final RabbitTemplate.ConfirmCallback confirmCallback = new ConfirmCallback() {
+		
+		@Override
+		public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+			// TODO Auto-generated method stub
+			String messageId = correlationData.getId();
+			if(ack) {
+				MessageLog messageLog = new MessageLog();
+				messageLog.setMessageID(messageId);
+				messageLog.setStatus(Constant.ORDER_SEND_SUCCESS);
+				messageLogMapper.updateMessageStatus(messageLog);
+			}
+		}
+	};
+	
+	public void sendOrder(Order order) {
+		rabbitTemplate.setConfirmCallback(confirmCallback);
+		CorrelationData correlationData = new CorrelationData(order.getMessageId());
+		rabbitTemplate.convertAndSend("Order-exchange", "order.a", order, correlationData);
+	}
+}

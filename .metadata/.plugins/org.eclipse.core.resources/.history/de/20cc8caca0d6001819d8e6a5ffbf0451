@@ -1,0 +1,16 @@
+package com.example.springbootproducer.mapper;
+
+import java.util.List;
+
+import com.example.springbootproducer.entity.MessageLog;
+
+public interface MessageLogMapper {
+
+	void updateMessageStatus(MessageLog messageLog);
+	
+	void insertMessageLog(MessageLog messageLog);
+	
+	List<MessageLog> selectMessageByStatus();
+	
+	void updateCount(MessageLog messageLog);
+}
